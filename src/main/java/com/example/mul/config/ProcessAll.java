@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,24 +22,18 @@ public class ProcessAll {
 	@Autowired
 	private PrintService printService;
 	
-	@Bean(initMethod ="firstRun")
+	@PostConstruct
 	public void processAllCL() throws InterruptedException {
 
 		log.info("fetching list...");
 		Thread.sleep(5000);
 		List<StringModel> stringListdb= new ArrayList<>();
-		StringModel stringModel = new StringModel();
-		stringModel.setName("a");
-		stringListdb.add(stringModel);
-		stringModel = new StringModel();
-		stringModel.setName("b");
-		stringListdb.add(stringModel);
-		stringModel = new StringModel();
-		stringModel.setName("c");
-		stringListdb.add(stringModel);
-		stringModel = new StringModel();
-		stringModel.setName("d");
-		stringListdb.add(stringModel);
+		stringListdb.add(new StringModel("a"));
+		stringListdb.add(new StringModel("b"));
+		stringListdb.add(new StringModel("c"));
+		stringListdb.add(new StringModel("d"));
+		stringListdb.add(new StringModel("e"));
+		stringListdb.add(new StringModel("f"));
 		
 		log.info("list fetched");
 		
